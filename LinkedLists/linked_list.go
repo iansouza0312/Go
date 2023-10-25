@@ -18,6 +18,42 @@ func (l *List) Append(pessoa Pessoa) {
 	l.Tail = node
 }
 
+func (l *List) Search(nome string) (pessoa Pessoa){
+	node := l.Head
+	for node != nil{
+		if node.Value.Name == nome{
+			pessoa = node.Value
+			break
+		}
+		node = node.Next
+	}
+
+	return
+}
+
+func (l *List) Remove(nome string){
+	if l.Head.Value.Name == nome{
+		l.Head = l.Head.Next
+		return
+	}
+
+	prev := l.Head
+	node := l.Head.Next
+
+	for node != nil{
+		if node.Value.Name == nome{
+			prev.Next = node.Next
+			break
+		}
+		prev = node
+		node = node.Next
+	}
+
+	if l.Tail == node{
+		l.Tail = prev
+	}
+}
+
 func (l *List) Display() {
 	node := l.Head
 	for node != nil {
